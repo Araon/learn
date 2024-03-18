@@ -1,0 +1,2 @@
+# Why?
+i know it's too late to admit but yes, i really hate oops but to hate oops you need to understand why one would hate oops - million of devices are powerd by it (yes, i'm looking at you java) so i needed to dive deeper 
