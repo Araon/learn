@@ -5,4 +5,4 @@ things i truly want to understand, mostly are basic stuff that i neglected but i
 
 reason for learning:
 - [Oops](./LLD/readme.md)
-- [ELasticSearch](./ElasticSearch/README.md)
+- [ElasticSearch](./ElasticSearch/README.md)

@@ -1,10 +1,3 @@
-"""
-Elasticsearch Country Search Example
-
-This module demonstrates how to use Elasticsearch for indexing and searching country data.
-It fetches country information from the REST Countries API and provides various search operations.
-"""
-
 import time
 from typing import Dict, List, Optional, Any, Tuple
 import logging
@@ -24,16 +17,9 @@ API_BASE_URL = "https://restcountries.com/v3.1"
 
 
 class CountrySearchService:
-    """Service class for managing country data in Elasticsearch."""
     
     def __init__(self, es_client: Elasticsearch, index_name: str = INDEX_NAME):
-        """
-        Initialize the CountrySearchService.
-        
-        Args:
-            es_client: Elasticsearch client instance
-            index_name: Name of the index to use
-        """
+
         self.es_client = es_client
         self.index_name = index_name
         
@@ -59,12 +45,7 @@ class CountrySearchService:
         self.es_client.indices.create(index=self.index_name, mappings=country_mapping)
 
     def fetch_countries_data(self) -> Optional[List[Dict[str, Any]]]:
-        """
-        Fetch country data from the REST Countries API.
-        
-        Returns:
-            List of country dictionaries or None if fetch fails
-        """
+
         try:
             fields = "name,region,subregion,capital,population,area"
             url = f"{API_BASE_URL}/all?fields={fields}"
@@ -79,15 +60,7 @@ class CountrySearchService:
             return None
 
     def process_and_index_data(self, country_data: List[Dict[str, Any]]) -> bool:
-        """
-        Process and bulk index country data into Elasticsearch.
-        
-        Args:
-            country_data: List of country dictionaries from the API
-            
-        Returns:
-            True if indexing was successful, False otherwise
-        """
+
         actions = []
         
         for i, country in enumerate(country_data):
@@ -124,12 +97,7 @@ class CountrySearchService:
             return False
 
     def search_countries_by_name(self, query_text: str) -> None:
-        """
-        Search for countries by name using wildcard query.
-        
-        Args:
-            query_text: Text to search for in country names
-        """
+
         logger.info(f"Searching for countries with '{query_text}' in their name...")
         
         query = {
@@ -150,13 +118,7 @@ class CountrySearchService:
             logger.error(f"Error during search: {e}")
 
     def search_by_region_and_population(self, region: str, min_population: int) -> None:
-        """
-        Search for countries by region with minimum population filter.
-        
-        Args:
-            region: Region to filter by
-            min_population: Minimum population threshold
-        """
+
         logger.info(f"Searching for countries in '{region}' with population > {min_population:,}...")
         
         query = {
@@ -188,7 +150,6 @@ class CountrySearchService:
             logger.error(f"Error during search: {e}")
 
     def aggregate_countries_by_subregion(self) -> None:
-        """Aggregate and display country counts by subregion."""
         logger.info("Aggregating country counts by subregion...")
         
         query_body = {
@@ -216,10 +177,7 @@ class CountrySearchService:
             logger.error(f"Error during aggregation: {e}")
 
     def interactive_search(self) -> None:
-        """
-        Interactive search loop that allows users to search for countries, regions, or continents.
-        Users can enter 'quit' or 'exit' to stop the loop.
-        """
+
         print("\n" + "="*60)
         print("Interactive Country Search")
         print("="*60)
@@ -252,12 +210,7 @@ class CountrySearchService:
                 print(f"An error occurred: {e}")
 
     def _perform_comprehensive_search(self, query: str) -> None:
-        """
-        Perform a comprehensive search across multiple fields.
-        
-        Args:
-            query: The search query from the user
-        """
+
         print(f"\nSearching for: '{query}'...")
         
         # Multi-field search query
@@ -343,8 +296,7 @@ class CountrySearchService:
 
 
 def main() -> None:
-    """Main function to demonstrate Elasticsearch operations."""
-    # Initialize Elasticsearch client
+
     try:
         es_client = Elasticsearch(hosts=[ELASTICSEARCH_HOST])
         
