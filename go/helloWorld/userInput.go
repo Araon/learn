@@ -21,14 +21,14 @@ func main() {
 		fmt.Println(err)
 	}
 
-	userInput := strings.TrimSpace(input)
 	dt := time.Now()
-	if userInput == "date" {
+	switch userInput := strings.TrimSpace(input); userInput {
+
+	case "date":
 		fmt.Printf("The current date is %s\n", dt.Format("01-02-2006"))
-	} else if userInput == "time" {
+	case "time":
 		fmt.Printf("The current time is %s\n", dt.Format("15:00:00"))
-	} else {
+	default:
 		fmt.Println("Incorrect input")
 	}
-
 }
