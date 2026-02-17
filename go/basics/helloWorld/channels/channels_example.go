@@ -17,7 +17,6 @@ func test(i int, wg *sync.WaitGroup, results chan<- Results) {
 	defer wg.Done()
 	resp, err := http.Get("https://catfact.ninja/fact")
 	if err != nil {
-		// fmt.Printf("Goroutine #%d: error: %v\n", i, err)
 		results <- Results{i, "", err}
 		return
 	}
@@ -29,12 +28,10 @@ func test(i int, wg *sync.WaitGroup, results chan<- Results) {
 
 	var fact CatFact
 	if err := json.NewDecoder(resp.Body).Decode(&fact); err != nil {
-		// fmt.Printf("Goroutine #%d: error decoding response: %v\n", i, err)
 		results <- Results{i, "", err}
 		return
 	}
 
-	// fmt.Printf("CatFact #%d: %s\n", i, fact.Fact)
 	results <- Results{i, fact.Fact, nil}
 }
 
@@ -47,9 +44,8 @@ func main() {
 
 	results := make(chan Results, numGoroutines)
 
-	for i := 0; i < numGoroutines; i++ {
+	for i := range numGoroutines {
 		go test(i, &wg, results)
-
 	}
 
 	wg.Wait()
@@ -60,14 +56,15 @@ func main() {
 		ordered[r.Index] = r
 	}
 
-	for i := 0; i < numGoroutines; i++ {
+	for i := range numGoroutines {
 		if ordered[i].Err != nil {
 			fmt.Printf("Error %v\n", ordered[i].Err)
 			continue
 		}
-		fmt.Printf("Catfact #%d: %s\n", i, ordered[i].Fact)
+		fmt.Printf("\nCatfact #%d: %s\n", i, ordered[i].Fact)
+
 	}
 
-	fmt.Println("Main function is running.")
+	fmt.Println("\nMain function is running.")
 
 }
