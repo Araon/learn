@@ -1,8 +1,22 @@
-# /learn
+# Learn
+
 ![downTOclown](docs/down_to_clown.jpg)
 
-things i truly want to understand, mostly are basic stuff that i neglected but is now comming back to bite me in the ass
+Things I truly want to understand - mostly basic stuff that I neglected but is now coming back to bite me in the ass.
 
-reason for learning:
-- [Oops](./LLD/readme.md)
-- [ElasticSearch](./ElasticSearch/README.md)
+## Topics
+
+| Topic | Description |
+|-------|-------------|
+| [LLD](./LLD/) | Low Level Design - OOPS concepts, system design |
+| [ElasticSearch](./ElasticSearch/) | Elasticsearch tutorials and examples |
+| [Go](./go/) | Go programming language projects |
+| [Java](./Java/) | Java basics and demos |
+| [Node.js](./nodejs/) | Node.js server examples |
+| [RabbitMQ](./RabbitMQ/) | RabbitMQ message queue examples |
+
+## Structure
+
+Each topic directory contains:
+- Code examples and projects
+- README.md with learning notes
