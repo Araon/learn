@@ -12,23 +12,26 @@ func main() {
 	welcomeString := "Ticktokcer is running"
 	fmt.Println(welcomeString)
 
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Println("Do you want to know the time or date")
+	for {
 
-	// err ok syntax aka try-catch
-	input, err := reader.ReadString('\n') // \n if the ender, how long you want to read
-	if err != nil {
-		fmt.Println(err)
-	}
+		reader := bufio.NewReader(os.Stdin)
+		fmt.Println("Do you want to know the time or date")
 
-	dt := time.Now()
-	switch userInput := strings.TrimSpace(input); userInput {
+		// err ok syntax aka try-catch
+		input, err := reader.ReadString('\n') // \n if the ender, how long you want to read
+		if err != nil {
+			fmt.Println(err)
+		}
 
-	case "date":
-		fmt.Printf("The current date is %s\n", dt.Format("01-02-2006"))
-	case "time":
-		fmt.Printf("The current time is %s\n", dt.Format("15:00:00"))
-	default:
-		fmt.Println("Incorrect input")
+		dt := time.Now()
+		switch userInput := strings.TrimSpace(input); userInput {
+
+		case "date":
+			fmt.Printf("The current date is %s\n", dt.Format("01-02-2006"))
+		case "time":
+			fmt.Printf("The current time is %s\n", dt.Format("15:00:00"))
+		default:
+			fmt.Println("Incorrect input")
+		}
 	}
 }
