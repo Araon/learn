@@ -1,0 +1,92 @@
+{
+  "info": {
+    "name": "Notes API",
+    "description": "NestJS Notes API for learning",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Notes",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/notes",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["notes"]
+        }
+      }
+    },
+    {
+      "name": "Create Note",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:3000/notes",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["notes"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"content\": \"My first note\",\n  \"tags\": \"work, important\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Get One Note",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/notes/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["notes", ":id"]
+        }
+      }
+    },
+    {
+      "name": "Update Note",
+      "request": {
+        "method": "PATCH",
+        "url": {
+          "raw": "http://localhost:3000/notes/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["notes", ":id"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"content\": \"Updated content\",\n  \"tags\": \"personal\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Delete Note",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:3000/notes/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["notes", ":id"]
+        }
+      }
+    }
+  ]
+}
