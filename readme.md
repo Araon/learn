@@ -21,3 +21,4 @@ Things I truly want to understand - mostly basic stuff that I neglected but is n
 
 ### System Design
 - [LLD](./LLD/) - Low Level Design and OOPS concepts
+- [RBAC](./rbac/) - Role Based Access Control implementation in Python
