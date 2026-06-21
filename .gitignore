@@ -2,6 +2,11 @@
 node_modules
 package-lock.json
 .env
-*.mod
 .vscode
 .DS_Store
+.ruff_cache/
+
+# Don't block Go module files (go.mod)
+# Use specific patterns for build artifacts instead
+*.mod
+!**/go.mod
