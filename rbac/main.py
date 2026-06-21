@@ -1,39 +1,24 @@
+from contextlib import asynccontextmanager
 
-from rbac import PermissionService
+from fastapi import FastAPI
 
-service = PermissionService()
-
-alice = service.create_user("alice")
-bob = service.create_user("bob")
-
-admin = service.create_role("admin")
-read = service.create_role("read")
-
-service.assign_role(alice, admin)
-service.assign_role(alice, read)
-
-service.assign_role(bob, read)
-
-service.assign_permission(admin, "create_post")
-service.assign_permission(admin, "delete_post")
-service.assign_permission(admin, "read_post")
-service.assign_permission(read, "read_post")
-
-# Test get_user_permissions
-alice_perms = service.get_user_permission(alice)
-print(f"Alice's permissions: {alice_perms}")
-
-bob_perms = service.get_user_permission(bob)
-print(f"Bob's permissions: {bob_perms}")
-
-# Test can
-print(f"Alice can read_post: {service.can(alice, 'read_post')}")
-print(f"Alice can delete_post: {service.can(alice, 'delete_post')}")
-print(f"Bob can delete_post: {service.can(bob, 'delete_post')}")
+from api.deps import db_session_middleware
+from api.routes import permissions, roles, users
+from cache.redis_client import redis
+from core.database import engine, init_db
 
 
-# print(json.dumps(service.users, indent=4))
-# print("-"*30)
-# print(json.dumps(service.roles, indent=4))
-# print("-"*30)
-# print(json.dumps(service.user_roles, indent=4))
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await init_db()
+    yield
+    await redis.aclose()
+    await engine.dispose()
+
+
+app = FastAPI(lifespan=lifespan)
+app.middleware("http")(db_session_middleware)
+
+app.include_router(users.router)
+app.include_router(roles.router)
+app.include_router(permissions.router)

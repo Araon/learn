@@ -1,1 +1,6 @@
-# No external dependencies - standard library only (Python 3.6+)
+fastapi
+uvicorn
+sqlalchemy[asyncio]
+asyncpg
+pydantic-settings
+redis>=4.2
