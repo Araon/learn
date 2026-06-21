@@ -62,3 +62,13 @@ curl "http://localhost:8000/check?user_id=<alice-id>&permission=wallet:delete"
 ## why the contextvar thing
 
 my engineer friend at work suggested using a contextvar for the db session instead of fastapi's dependency injection. makes the service functions cleaner — no need to pass `db` as a parameter everywhere, they just grab it from the context. middleware sets it per request, services read it, everyone's happy.
+
+## todos / what's next
+
+- [ ] add jwt authentication (login, signup, protected routes)
+- [ ] session ttl — expire cached permissions in redis
+- [ ] proper error handling instead of raw sqlalchemy exceptions
+- [ ] migration tooling (alembic) instead of auto-create-all
+- [ ] tests that don't require a running database
+- [ ] pagination on user/role listing endpoints
+- [ ] maybe a `DELETE /users/{id}` and `DELETE /roles/{id}`
