@@ -19,4 +19,3 @@ async def init_db(reset: bool = False):
         if reset:
             await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
-        
